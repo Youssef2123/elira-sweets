@@ -1,0 +1,250 @@
+<!-- sur-mesure.html - Page dédiée à la création 100% libre -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Création Sur Mesure | ELIRA SWEETS</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><i class="fas fa-crown"></i> ELIRA SWEETS</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li class="nav-item-mega">
+          <a href="#">Personnaliser <i class="fas fa-chevron-down" style="font-size: 0.8rem; margin-left: 4px;"></i></a>
+          <div class="mega-menu-panel">
+            <div class="mega-grid">
+              <a href="index.html?category=classic" class="mega-item">
+                <i class="fas fa-birthday-cake"></i>
+                <h4>Classique</h4>
+                <p>Nos recettes traditionnelles riches en saveurs.</p>
+              </a>
+              <a href="index.html?category=sugar-free" class="mega-item">
+                <i class="fas fa-leaf"></i>
+                <h4>Sans Sucre</h4>
+                <p>Pour le plaisir sans culpabilité (Diabétique Friendly).</p>
+              </a>
+              <a href="index.html?category=gluten-free" class="mega-item">
+                <i class="fas fa-wheat-awn-circle-exclamation"></i>
+                <h4>Sans Gluten</h4>
+                <p>Certifié sans gluten pour les régimes cœliaques.</p>
+              </a>
+              <a href="sur-mesure.html" class="mega-item">
+                <i class="fas fa-magic"></i>
+                <h4>Sur Mesure</h4>
+                <p>Liberté totale. Créez votre dessert de A à Z.</p>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li><a href="cart.html">Panier (<span id="cartCount">0</span>)</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <h2 class="section-title">✨ Personnalisez votre création Sur Mesure</h2>
+    <div style="max-width: 1400px; margin: 0 auto; padding: 0 1rem;">
+      <div class="badges-container">
+        <span class="diet-badge" style="background:#2b2b3a; color:#fff;">Sur Mesure</span>
+      </div>
+    </div>
+
+    <div class="customize-container">
+      <!-- Colonne ingrédients -->
+      <div class="ingredients-panel">
+        <h3><i class="fas fa-seedling"></i> Ingrédients de base</h3>
+        <div class="checkbox-group" id="baseIngredients">
+          <!-- Injectés par JS -->
+        </div>
+        <h3 style="margin-top: 2rem;"><i class="fas fa-star-of-life"></i> Alternatives & extras</h3>
+        <div class="checkbox-group" id="altIngredients">
+          <!-- Injectés par JS -->
+        </div>
+      </div>
+
+      <!-- Colonne récapitulatif -->
+      <div class="final-section">
+        <h3><i class="fas fa-magic"></i> Votre recette unique</h3>
+        <div class="final-ingredients" id="finalIngredientsList">
+          <!-- Injectés par JS -->
+        </div>
+        
+        <div class="nutrition-info">
+          <h4><i class="fas fa-info-circle"></i> Valeurs Nutritionnelles (est.)</h4>
+          <div class="nutrition-grid">
+            <div class="nutrition-item">
+              <span class="nutrition-value" id="nutriCalories">0</span>
+              <span class="nutrition-label">kcal</span>
+            </div>
+            <div class="nutrition-item">
+              <span class="nutrition-value" id="nutriSugar">0g</span>
+              <span class="nutrition-label">Sucre</span>
+            </div>
+            <div class="nutrition-item">
+              <span class="nutrition-value" id="nutriGluten">Oui</span>
+              <span class="nutrition-label">Contient du Gluten</span>
+            </div>
+            <div class="nutrition-item">
+              <span class="nutrition-value" id="nutriProtein">0g</span>
+              <span class="nutrition-label">Protéines</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin: 1.5rem 0 1rem 0;">
+          <span style="font-weight:500">Prix personnalisé :</span>
+          <div class="dynamic-price" id="customPriceDisplay">10.00 €</div>
+        </div>
+        <button id="addToCartBtn" class="btn-primary" style="width:100%"><i class="fas fa-cart-plus"></i> Ajouter au panier</button>
+        <p id="currentProductName" style="margin-top: 1rem; font-size:0.85rem; color:var(--violet);">🍰 Personnalisation : Création Libre (base 10.00€)</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>ELIRA SWEETS — L’art de la pâtisserie personnalisée © 2025</p>
+  </footer>
+
+  <div id="toastMsg" class="toast-notif">✓ Ajouté au panier</div>
+  <script src="script.js"></script>
+  <script>
+    // Configuration exclusive Sur Mesure
+    const currentProduct = {
+      name: "Création Libre",
+      basePrice: 10.0,
+      category: "custom"
+    };
+
+    const ingredientsConfig = {
+      base: [
+        { name: "Farine au choix", checked: true, cal: 140, sug: 1, pro: 4, glut: true },
+        { name: "Sucrant au choix", checked: true, cal: 100, sug: 20, pro: 0, glut: false },
+        { name: "Matière grasse", checked: true, cal: 150, sug: 0, pro: 0, glut: false }
+      ],
+      alt: [
+        { name: "Fruits frais", price: 1.0, cal: 30, sug: 5, pro: 0, glut: false },
+        { name: "Chocolat", price: 1.5, cal: 150, sug: 15, pro: 2, glut: false },
+        { name: "Noix diverses", price: 1.0, cal: 120, sug: 1, pro: 4, glut: false },
+        { name: "Caramel", price: 1.5, cal: 150, sug: 25, pro: 1, glut: false }
+      ]
+    };
+
+    const finalDiv = document.getElementById('finalIngredientsList');
+    const priceSpan = document.getElementById('customPriceDisplay');
+    const baseContainer = document.getElementById('baseIngredients');
+    const altContainer = document.getElementById('altIngredients');
+    const toast = document.getElementById('toastMsg');
+    
+    // Nutrition elements
+    const nutriCal = document.getElementById('nutriCalories');
+    const nutriSugar = document.getElementById('nutriSugar');
+    const nutriGluten = document.getElementById('nutriGluten');
+    const nutriProtein = document.getElementById('nutriProtein');
+
+    let ingredientsData = {}; 
+
+    function renderUI() {
+      // Render Base
+      baseContainer.innerHTML = '';
+      ingredientsConfig.base.forEach((ing) => {
+        ingredientsData[ing.name] = ing;
+        const lbl = document.createElement('label');
+        lbl.innerHTML = `<input type="checkbox" value="${ing.name}" class="base-cb" ${ing.checked ? 'checked' : ''}> ${ing.name}`;
+        baseContainer.appendChild(lbl);
+      });
+
+      // Render Alt
+      altContainer.innerHTML = '';
+      ingredientsConfig.alt.forEach((ing) => {
+        ingredientsData[ing.name] = ing;
+        const lbl = document.createElement('label');
+        lbl.innerHTML = `<input type="checkbox" value="${ing.name}" class="alt-cb" data-price="${ing.price}"> ${ing.name} (+${ing.price.toFixed(2)}€)`;
+        altContainer.appendChild(lbl);
+      });
+
+      document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', updatePriceAndIngredients);
+      });
+
+      updatePriceAndIngredients();
+    }
+
+    function updatePriceAndIngredients() {
+      const baseCbs = document.querySelectorAll('.base-cb');
+      const altCbs = document.querySelectorAll('.alt-cb');
+
+      let selectedBase = Array.from(baseCbs).filter(cb => cb.checked).map(cb => cb.value);
+      let selectedAlt = Array.from(altCbs).filter(cb => cb.checked).map(cb => cb.value);
+      
+      let removedCount = baseCbs.length - selectedBase.length;
+      let deduction = removedCount * 0.5;
+      
+      let extraCost = 0;
+      Array.from(altCbs).filter(cb => cb.checked).forEach(cb => {
+        extraCost += parseFloat(cb.getAttribute('data-price'));
+      });
+
+      let finalPrice = currentProduct.basePrice - deduction + extraCost;
+      finalPrice = Math.max(finalPrice, 3.0);
+      
+      let allIngredients = [...selectedBase, ...selectedAlt];
+      finalDiv.innerText = allIngredients.length ? allIngredients.join(', ') : 'Pâte neutre';
+      priceSpan.innerText = finalPrice.toFixed(2) + ' €';
+
+      // Calcul nutritionnel
+      let totalCal = 0, totalSug = 0, totalPro = 0;
+      let hasGluten = false;
+
+      allIngredients.forEach(name => {
+        let data = ingredientsData[name];
+        if (data) {
+          totalCal += data.cal;
+          totalSug += data.sug;
+          totalPro += data.pro;
+          if (data.glut) hasGluten = true;
+        }
+      });
+
+      nutriCal.innerText = totalCal;
+      nutriSugar.innerText = totalSug + "g";
+      nutriProtein.innerText = totalPro + "g";
+      nutriGluten.innerText = hasGluten ? "Oui" : "Non";
+      nutriGluten.style.color = hasGluten ? "#b0004b" : "#128c46";
+
+      return { finalPrice, ingredientsList: allIngredients, nutrition: { cal: totalCal, sug: totalSug, pro: totalPro, glut: hasGluten } };
+    }
+
+    function addToCart() {
+      const { finalPrice, ingredientsList, nutrition } = updatePriceAndIngredients();
+      const cartItem = {
+        id: Date.now() + Math.random(),
+        name: currentProduct.name,
+        category: "custom",
+        finalPrice: finalPrice,
+        ingredients: [...ingredientsList],
+        nutrition: nutrition,
+        badges: `<span class="diet-badge" style="background:#2b2b3a; color:#fff;">Sur Mesure</span>`,
+        date: new Date().toLocaleString()
+      };
+      let cart = JSON.parse(localStorage.getItem('sweetCustomizeCart') || '[]');
+      cart.push(cartItem);
+      localStorage.setItem('sweetCustomizeCart', JSON.stringify(cart));
+      
+      toast.style.opacity = '1';
+      setTimeout(() => toast.style.opacity = '0', 2000);
+      
+      if (window.updateGlobalCartCount) window.updateGlobalCartCount();
+    }
+
+    document.getElementById('addToCartBtn').addEventListener('click', addToCart);
+    renderUI();
+  </script>
+</body>
+</html>

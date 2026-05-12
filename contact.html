@@ -1,0 +1,136 @@
+<!-- contact.html - Page contact simple -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | ELIRA SWEETS</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><i class="fas fa-crown"></i> ELIRA SWEETS</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li class="nav-item-mega">
+          <a href="#">Personnaliser <i class="fas fa-chevron-down" style="font-size: 0.8rem; margin-left: 4px;"></i></a>
+          <div class="mega-menu-panel">
+            <div class="mega-grid">
+              <a href="index.html?category=classic" class="mega-item">
+                <i class="fas fa-birthday-cake"></i>
+                <h4>Classique</h4>
+                <p>Nos recettes traditionnelles riches en saveurs.</p>
+              </a>
+              <a href="index.html?category=sugar-free" class="mega-item">
+                <i class="fas fa-leaf"></i>
+                <h4>Sans Sucre</h4>
+                <p>Pour le plaisir sans culpabilité (Diabétique Friendly).</p>
+              </a>
+              <a href="index.html?category=gluten-free" class="mega-item">
+                <i class="fas fa-wheat-awn-circle-exclamation"></i>
+                <h4>Sans Gluten</h4>
+                <p>Certifié sans gluten pour les régimes cœliaques.</p>
+              </a>
+              <a href="sur-mesure.html" class="mega-item">
+                <i class="fas fa-magic"></i>
+                <h4>Sur Mesure</h4>
+                <p>Liberté totale. Créez votre dessert de A à Z.</p>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li><a href="cart.html">Panier (<span id="cartCount">0</span>)</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="contact-container">
+    <div class="contact-wrapper">
+      <!-- Info Panel -->
+      <div class="contact-info-panel">
+        <h2>Parlons Douceurs</h2>
+        <p>Une demande particulière ? Un événement à venir ? Notre équipe est à votre écoute pour donner vie à vos projets les plus gourmands.</p>
+        
+        <div class="info-cards">
+          <div class="info-card">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h4>Email</h4>
+              <p>hello@elirasweets.com</p>
+            </div>
+          </div>
+          <div class="info-card">
+            <i class="fas fa-phone"></i>
+            <div>
+              <h4>Téléphone</h4>
+              <p>+33 1 23 45 67 89</p>
+            </div>
+          </div>
+          <div class="info-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h4>Atelier</h4>
+              <p>12 Rue de la Pâtisserie, 75001 Paris</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="social-links-contact">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-tiktok"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-pinterest"></i></a>
+        </div>
+      </div>
+
+      <!-- Form Card -->
+      <div class="contact-form-card">
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name">Nom complet</label>
+            <input type="text" id="name" placeholder="Votre nom..." required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="votre@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="subject">Sujet</label>
+            <select id="subject" style="width: 100%; padding: 1rem; border-radius: 16px; border: 1px solid rgba(103, 6, 38, 0.1); background: rgba(255, 255, 255, 0.5);">
+              <option value="question">Question générale</option>
+              <option value="event">Événement / Mariage</option>
+              <option value="problem">Problème avec une commande</option>
+              <option value="other">Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Votre message</label>
+            <textarea id="message" rows="5" placeholder="Comment pouvons-nous vous aider ?" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="width: 100%;">Envoyer le message <i class="fas fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>ELIRA SWEETS — L’art de la pâtisserie personnalisée © 2025</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('sweetCustomizeCart') || '[]');
+      const total = cart.reduce((acc) => acc + 1, 0);
+      const cartSpan = document.getElementById('cartCount');
+      if (cartSpan) cartSpan.innerText = total;
+    }
+    updateCartCount();
+    window.addEventListener('storage', updateCartCount);
+  </script>
+</body>
+</html>

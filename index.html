@@ -1,0 +1,305 @@
+<!-- index.html - Page d'accueil avec produits populaires -->
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELIRA SWEETS | Pâtisserie sur mesure</title>
+  <link rel="stylesheet" href="style.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><i class="fas fa-crown"></i> ELIRA SWEETS</a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Accueil</a></li>
+        <li class="nav-item-mega">
+          <a href="#">Personnaliser <i class="fas fa-chevron-down" style="font-size: 0.8rem; margin-left: 4px;"></i></a>
+          <div class="mega-menu-panel">
+            <div class="mega-grid">
+              <a href="index.html?category=classic" class="mega-item">
+                <i class="fas fa-birthday-cake"></i>
+                <h4>Classique</h4>
+                <p>Nos recettes traditionnelles riches en saveurs.</p>
+              </a>
+              <a href="index.html?category=sugar-free" class="mega-item">
+                <i class="fas fa-leaf"></i>
+                <h4>Sans Sucre</h4>
+                <p>Pour le plaisir sans culpabilité (Diabétique Friendly).</p>
+              </a>
+              <a href="index.html?category=gluten-free" class="mega-item">
+                <i class="fas fa-wheat-awn-circle-exclamation"></i>
+                <h4>Sans Gluten</h4>
+                <p>Certifié sans gluten pour les régimes cœliaques.</p>
+              </a>
+              <a href="sur-mesure.html" class="mega-item">
+                <i class="fas fa-magic"></i>
+                <h4>Sur Mesure</h4>
+                <p>Liberté totale. Créez votre dessert de A à Z.</p>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li><a href="cart.html">Panier (<span id="cartCount">0</span>)</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="luxury-hero">
+      <div class="luxury-brand-box">
+        <img src="images/ELIRA BRAND_Plan de travail 1.png" alt="ELIRA BRAND Logo" class="luxury-logo">
+        <p class="luxury-slogan">L’art de la pâtisserie personnalisée</p>
+      </div>
+
+      <div class="luxury-content">
+        <h1>Créez votre pâtisserie unique à votre image.</h1>
+        <p>Une expérience sensorielle d'exception, où chaque détail est conçu pour vous émerveiller.</p>
+        <a href="customize.html" class="btn-luxury">Commencer l'expérience <i class="fas fa-chevron-right"></i></a>
+      </div>
+
+      <div class="luxury-showcase">
+        <img src="images/problem from siliac 1.jpeg" alt="Signature Pastry Presentation" class="luxury-main-img">
+      </div>
+    </section>
+
+    <h2 class="section-title">🍰 Nos créations populaires</h2>
+    <div class="products-grid" id="productsGrid">
+      <!-- Les cartes produits avec lien vers personnalisation + paramètres -->
+      <div class="product-card" data-name="Gâteau au chocolat" data-price="12.9">
+        <img src="images/problem from siliac 1.jpeg"
+          alt="Gâteau chocolat signature" loading="lazy">
+        <div class="product-info">
+          <h3>Gâteau au chocolat</h3>
+          <div class="price">12,90 €</div>
+          <a href="customize.html?product=Gâteau au chocolat&price=12.9" class="btn-custom">Personnaliser</a>
+        </div>
+      </div>
+      <div class="product-card" data-name="Gâteau Banane & Choco" data-price="8.5">
+        <img src="images/problem from sugar 1.jpeg" alt="Pain à la banane gourmet" loading="lazy">
+        <div class="product-info">
+          <h3>Gâteau Banane & Choco</h3>
+          <div class="price">8,50 €</div>
+          <a href="customize.html?product=Donuts&price=8.5" class="btn-custom">Personnaliser</a>
+        </div>
+      </div>
+      <div class="product-card" data-name="Tarte Framboise" data-price="14.2">
+        <img src="images/problem from sugar.jpeg" alt="Tarte aux framboises fraîche" loading="lazy">
+        <div class="product-info">
+          <h3>Tarte Framboise</h3>
+          <div class="price">14,20 €</div>
+          <a href="customize.html?product=Cheesecake&price=14.2" class="btn-custom">Personnaliser</a>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- NOUVEAU PANEL: PFE Smart Dietary Platform -->
+    <h2 class="section-title" style="margin-top: 4rem;">🌱 Nos sélections par régime</h2>
+
+    <div class="filters-container">
+      <div class="category-tabs" id="categoryTabs">
+        <button class="tab-btn active" data-category="all">Tout</button>
+        <button class="tab-btn" data-category="classic">Classique</button>
+        <button class="tab-btn" data-category="sugar-free">Sans Sucre (Diabétique)</button>
+        <button class="tab-btn" data-category="gluten-free">Sans Gluten (Cœliaque)</button>
+        <button class="tab-btn" data-category="custom">100% Sur Mesure</button>
+      </div>
+
+      <div class="allergen-filters">
+        <span style="font-weight:600; color:var(--violet-fonce);"><i class="fas fa-filter"></i> Filtres :</span>
+        <label><input type="checkbox" id="filterLactose"> Sans Lactose</label>
+        <label><input type="checkbox" id="filterNuts"> Sans Fruits à coque</label>
+        <label><input type="checkbox" id="filterVegan"> Vegan</label>
+      </div>
+    </div>
+
+    <div class="products-grid" id="dietaryProductsGrid">
+      <!-- CLASSIC -->
+      <div class="product-card dietary-card" data-category="classic" data-lactose="false" data-nuts="false"
+        data-vegan="false">
+        <img src="images/poeple%20normal.jpeg" alt="Gâteau chocolat">
+        <div class="product-info">
+          <h3>Gâteau au chocolat</h3>
+          <div class="badges-container">
+            <span class="diet-badge" style="background:#e0d6ff; color:#5a189a;">Classique</span>
+          </div>
+          <div class="price">12,90 €</div>
+          <a href="customize.html?product=Gâteau au chocolat&price=12.9&category=classic"
+            class="btn-custom">Personnaliser</a>
+        </div>
+      </div>
+
+      <!-- SUGAR FREE 1 -->
+      <div class="product-card dietary-card" data-category="sugar-free" data-lactose="false" data-nuts="false"
+        data-vegan="false">
+        <img src="images/problem from sugar 1.jpeg" alt="Tarte aux fruits">
+        <div class="product-info">
+          <h3>Tarte aux fruits allégée</h3>
+          <div class="badges-container">
+            <span class="diet-badge badge-diabetic">Diabetic Friendly</span>
+          </div>
+          <div class="price">11,90 €</div>
+          <a href="customize.html?product=Tarte aux fruits allégée&price=11.9&category=sugar-free"
+            class="btn-custom">Personnaliser</a>
+        </div>
+      </div>
+
+      <!-- SUGAR FREE 2 -->
+      <div class="product-card dietary-card" data-category="sugar-free" data-lactose="true" data-nuts="false"
+        data-vegan="true">
+        <img src="images/problem from sugar.jpeg" alt="Mousse Framboise">
+        <div class="product-info">
+          <h3>Mousse Framboise Sans Sucre</h3>
+          <div class="badges-container">
+            <span class="diet-badge badge-diabetic">Diabetic Friendly</span>
+            <span class="diet-badge badge-vegan">Vegan</span>
+          </div>
+          <div class="price">9,50 €</div>
+          <a href="customize.html?product=Mousse Framboise Sans Sucre&price=9.5&category=sugar-free"
+            class="btn-custom">Personnaliser</a>
+        </div>
+      </div>
+
+      <!-- GLUTEN FREE 1 -->
+      <div class="product-card dietary-card" data-category="gluten-free" data-lactose="true" data-nuts="true"
+        data-vegan="true">
+        <img src="images/problem from siliac 1.jpeg" alt="Brownie Amande">
+        <div class="product-info">
+          <h3>Brownie (Sans Gluten)</h3>
+          <div class="badges-container">
+            <span class="diet-badge badge-gluten-free">Gluten-Free Certified</span>
+            <span class="diet-badge badge-vegan">Vegan</span>
+            <span class="diet-badge" style="background:#e3fded; color:#128c46; border: 1px solid #c2f5d9;">Sans Lactose</span>
+          </div>
+          <div class="price">13,50 €</div>
+          <a href="customize.html?product=Brownie Sans Gluten&price=13.5&category=gluten-free"
+            class="btn-custom">Personnaliser</a>
+        </div>
+      </div>
+
+      <!-- GLUTEN FREE 2 -->
+      <div class="product-card dietary-card" data-category="gluten-free" data-lactose="false" data-nuts="true"
+        data-vegan="false">
+        <img src="images/problem from siliac.jpeg" alt="Macarons Gourmet">
+        <div class="product-info">
+          <h3>Duo de Macarons (Cœliaque)</h3>
+          <div class="badges-container">
+            <span class="diet-badge badge-gluten-free">Gluten-Free Certified</span>
+          </div>
+          <div class="price">14,80 €</div>
+          <a href="customize.html?product=Duo de Macarons&price=14.8&category=gluten-free"
+            class="btn-custom">Personnaliser</a>
+        </div>
+      </div>
+
+      <!-- CUSTOM -->
+      <div class="product-card dietary-card" data-category="custom" data-lactose="true" data-nuts="true"
+        data-vegan="true">
+        <img src="images/custom-creation.jpeg"
+          alt="Pâtisserie sur mesure" loading="lazy">
+        <div class="product-info">
+          <h3>Création 100% Libre</h3>
+          <div class="badges-container">
+            <span class="diet-badge" style="background:#2b2b3a; color:#fff;">Sur Mesure</span>
+          </div>
+          <div class="price">À partir de 10,00 €</div>
+          <a href="sur-mesure.html"
+            class="btn-custom">Personnaliser</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>ELIRA SWEETS — L’art de la pâtisserie personnalisée © 2025</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Mise à jour du compteur panier sur toutes les pages
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('sweetCustomizeCart') || '[]');
+      const total = cart.reduce((acc) => acc + 1, 0);
+      const cartSpan = document.getElementById('cartCount');
+      if (cartSpan) cartSpan.innerText = total;
+    }
+    updateCartCount();
+    window.addEventListener('storage', updateCartCount);
+
+    // Filtrage des produits pour le panel Diététique
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabs = document.querySelectorAll('.tab-btn');
+      const products = document.querySelectorAll('.dietary-card');
+      const filterLactose = document.getElementById('filterLactose');
+      const filterNuts = document.getElementById('filterNuts');
+      const filterVegan = document.getElementById('filterVegan');
+
+      function filterProducts() {
+        const activeTabBtn = document.querySelector('.tab-btn.active');
+        if (!activeTabBtn) return;
+        const activeTab = activeTabBtn.getAttribute('data-category');
+        const isLactoseFree = filterLactose ? filterLactose.checked : false;
+        const isNutFree = filterNuts ? filterNuts.checked : false;
+        const isVegan = filterVegan ? filterVegan.checked : false;
+
+        products.forEach(product => {
+          const category = product.getAttribute('data-category');
+          const pLactose = product.getAttribute('data-lactose') === 'true';
+          const pNuts = product.getAttribute('data-nuts') === 'true';
+          const pVegan = product.getAttribute('data-vegan') === 'true';
+
+          let show = true;
+
+          if (activeTab !== 'all' && category !== activeTab) show = false;
+          if (isLactoseFree && !pLactose) show = false;
+          if (isNutFree && !pNuts) show = false;
+          if (isVegan && !pVegan) show = false;
+
+          product.style.display = show ? 'block' : 'none';
+        });
+      }
+
+      // Gestion des onglets
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          filterProducts();
+        });
+      });
+
+      // Gestion des paramètres d'URL (pour le Mega Menu)
+      const urlParams = new URLSearchParams(window.location.search);
+      const catParam = urlParams.get('category');
+      if (catParam) {
+        const targetTab = document.querySelector(`.tab-btn[data-category="${catParam}"]`);
+        if (targetTab) {
+          tabs.forEach(t => t.classList.remove('active'));
+          targetTab.classList.add('active');
+          // Scroll doux vers la section
+          setTimeout(() => {
+            targetTab.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 300);
+        }
+      }
+
+      if (filterLactose && filterNuts && filterVegan) {
+        [filterLactose, filterNuts, filterVegan].forEach(cb => {
+          cb.addEventListener('change', filterProducts);
+        });
+      }
+
+      filterProducts(); // Initial call
+    });
+  </script>
+</body>
+
+</html>

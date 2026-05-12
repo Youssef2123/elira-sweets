@@ -1,0 +1,241 @@
+<!-- cart.html - Panier avec gestion des produits personnalisés -->
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon panier | ELIRA SWEETS</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo"><i class="fas fa-crown"></i> ELIRA SWEETS</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li class="nav-item-mega">
+          <a href="#">Personnaliser <i class="fas fa-chevron-down"
+              style="font-size: 0.8rem; margin-left: 4px;"></i></a>
+          <div class="mega-menu-panel">
+            <div class="mega-grid">
+              <a href="index.html?category=classic" class="mega-item">
+                <i class="fas fa-birthday-cake"></i>
+                <h4>Classique</h4>
+                <p>Nos recettes traditionnelles riches en saveurs.</p>
+              </a>
+              <a href="index.html?category=sugar-free" class="mega-item">
+                <i class="fas fa-leaf"></i>
+                <h4>Sans Sucre</h4>
+                <p>Pour le plaisir sans culpabilité (Diabétique Friendly).</p>
+              </a>
+              <a href="index.html?category=gluten-free" class="mega-item">
+                <i class="fas fa-wheat-awn-circle-exclamation"></i>
+                <h4>Sans Gluten</h4>
+                <p>Certifié sans gluten pour les régimes cœliaques.</p>
+              </a>
+              <a href="sur-mesure.html" class="mega-item">
+                <i class="fas fa-magic"></i>
+                <h4>Sur Mesure</h4>
+                <p>Liberté totale. Créez votre dessert de A à Z.</p>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li><a href="cart.html" class="active">Panier (<span id="cartCount">0</span>)</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="cart-luxury-page">
+    <div class="cart-brand-header">
+      <img src="images/ELIRA BRAND_Plan de travail 1.png" alt="ELIRA Logo" class="cart-luxury-logo">
+      <h1>Votre Panier Gourmet</h1>
+      <div class="luxury-divider"></div>
+    </div>
+
+    <div class="cart-grid">
+      <!-- Section Items -->
+      <div class="cart-items-column">
+        <div id="cartItemsList">
+          <!-- Injecté par JS -->
+        </div>
+      </div>
+
+      <!-- Section Summary -->
+      <div class="cart-summary-column">
+        <div class="summary-luxury-card">
+          <h2>Résumé de la commande</h2>
+          <div class="summary-details">
+            <div class="summary-row">
+              <span>Sous-total</span>
+              <span id="subtotalDisplay">0.00 €</span>
+            </div>
+            <div class="summary-row">
+              <span>Frais de livraison</span>
+              <span id="deliveryDisplay">5.00 €</span>
+            </div>
+            <div class="summary-row promo-row">
+              <span>Remise Gourmet</span>
+              <span>-0.00 €</span>
+            </div>
+            <div class="luxury-divider-small"></div>
+            <div class="summary-row total-row">
+              <span>Total TTC</span>
+              <span id="totalDisplay">0.00 €</span>
+            </div>
+          </div>
+          <button id="validateOrderBtn" class="btn-luxury-checkout">
+            <span>Valider la commande</span>
+            <i class="fas fa-long-arrow-alt-right"></i>
+          </button>
+          <p class="payment-security"><i class="fas fa-shield-alt"></i> Paiement 100% sécurisé</p>
+        </div>
+        
+        <div class="luxury-info-card">
+          <i class="fas fa-truck-moving"></i>
+          <div>
+            <h4>Livraison Premium</h4>
+            <p>Livré dans un emballage isotherme pour préserver la fraîcheur.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>ELIRA SWEETS — L’art de la pâtisserie personnalisée © 2025</p>
+  </footer>
+
+  <div id="toastMsg" class="toast-notif">✓ Action effectuée</div>
+  <script src="script.js"></script>
+  <script>
+    let cart = [];
+    const cartList = document.getElementById('cartItemsList');
+    const subtotalEl = document.getElementById('subtotalDisplay');
+    const totalEl = document.getElementById('totalDisplay');
+    const deliveryFee = 5.0;
+    const toast = document.getElementById('toastMsg');
+
+    function showNotification(msg) {
+      toast.innerText = msg;
+      toast.style.opacity = '1';
+      setTimeout(() => toast.style.opacity = '0', 2000);
+    }
+
+    function saveCart() {
+      localStorage.setItem('sweetCustomizeCart', JSON.stringify(cart));
+      updateCartCounter();
+      window.dispatchEvent(new Event('storage'));
+    }
+
+    function updateCartCounter() {
+      const total = cart.reduce((acc, item) => acc + (item.quantity || 1), 0);
+      const cartSpan = document.getElementById('cartCount');
+      if (cartSpan) cartSpan.innerText = total;
+    }
+
+    function renderCart() {
+      if (!cartList) return;
+      if (cart.length === 0) {
+        cartList.innerHTML = `
+          <div class="empty-cart-luxury">
+            <i class="fas fa-shopping-bag"></i>
+            <p>Votre panier est encore vide de douceurs.</p>
+            <a href="index.html" class="btn-luxury">Découvrir nos créations</a>
+          </div>`;
+        subtotalEl.innerText = "0.00 €";
+        totalEl.innerText = "0.00 €";
+        return;
+      }
+
+      let html = '';
+      let subtotal = 0;
+
+      cart.forEach((item, index) => {
+        const qty = item.quantity || 1;
+        const itemTotal = item.finalPrice * qty;
+        subtotal += itemTotal;
+
+        const ingredientsDisplay = item.ingredients.length ? item.ingredients.join(', ') : 'Recette Signature';
+        
+        // Placeholder image for luxury feel
+        const itemImg = item.category === 'sugar-free' ? 'images/problem from sugar 1.jpeg' : 
+                        item.category === 'gluten-free' ? 'images/problem from siliac 1.jpeg' : 
+                        'images/custom-creation.jpeg';
+
+        html += `
+          <div class="luxury-cart-item">
+            <div class="cart-item-img-box">
+              <img src="${itemImg}" alt="${item.name}">
+            </div>
+            <div class="cart-item-info">
+              <div class="cart-item-header">
+                <h3>${item.name}</h3>
+                <button class="btn-remove-luxury" onclick="removeItem(${index})"><i class="far fa-trash-alt"></i></button>
+              </div>
+              <p class="cart-item-category">${item.category === 'custom' ? 'Sur Mesure' : 'Sélection Diététique'}</p>
+              <p class="cart-item-ingredients-list">${ingredientsDisplay}</p>
+              
+              <div class="cart-item-footer">
+                <div class="quantity-control">
+                  <button onclick="updateQty(${index}, -1)">-</button>
+                  <span>${qty}</span>
+                  <button onclick="updateQty(${index}, 1)">+</button>
+                </div>
+                <div class="cart-item-price">${itemTotal.toFixed(2)} €</div>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      cartList.innerHTML = html;
+      subtotalEl.innerText = subtotal.toFixed(2) + " €";
+      totalEl.innerText = (subtotal + deliveryFee).toFixed(2) + " €";
+    }
+
+    window.removeItem = function(index) {
+      cart.splice(index, 1);
+      saveCart();
+      renderCart();
+      showNotification('Douceur retirée du panier');
+    }
+
+    window.updateQty = function(index, delta) {
+      if (!cart[index].quantity) cart[index].quantity = 1;
+      cart[index].quantity += delta;
+      if (cart[index].quantity < 1) cart[index].quantity = 1;
+      saveCart();
+      renderCart();
+    }
+
+    function loadCart() {
+      const stored = localStorage.getItem('sweetCustomizeCart');
+      cart = stored ? JSON.parse(stored) : [];
+      renderCart();
+      updateCartCounter();
+    }
+
+    loadCart();
+
+    document.getElementById('validateOrderBtn').addEventListener('click', () => {
+      if (cart.length === 0) return;
+      alert("🎉 Merci pour votre confiance ! Votre commande ELIRA Sweets est en cours de préparation.");
+      cart = [];
+      saveCart();
+      renderCart();
+    });
+
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'sweetCustomizeCart') loadCart();
+    });
+  </script>
+</body>
+
+</html>
