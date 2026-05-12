@@ -17,7 +17,10 @@
   <nav class="navbar">
     <div class="nav-container">
       <a href="index.html" class="logo"><i class="fas fa-crown"></i> ELIRA SWEETS</a>
-      <ul class="nav-links">
+      <button class="menu-toggle" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links" id="navLinks">
         <li><a href="index.html" class="active">Accueil</a></li>
         <li class="nav-item-mega">
           <a href="#">Personnaliser <i class="fas fa-chevron-down" style="font-size: 0.8rem; margin-left: 4px;"></i></a>
@@ -34,7 +37,7 @@
                 <p>Pour le plaisir sans culpabilité (Diabétique Friendly).</p>
               </a>
               <a href="index.html?category=gluten-free" class="mega-item">
-                <i class="fas fa-wheat-awn-circle-exclamation"></i>
+                <i class="fas fa-seedling"></i>
                 <h4>Sans Gluten</h4>
                 <p>Certifié sans gluten pour les régimes cœliaques.</p>
               </a>
@@ -74,31 +77,30 @@
     <div class="products-grid" id="productsGrid">
       <!-- Les cartes produits avec lien vers personnalisation + paramètres -->
       <div class="product-card" data-name="Gâteau au chocolat" data-price="12.9">
-        <img src="images/problem from siliac 1.jpeg"
-          alt="Gâteau chocolat signature" loading="lazy">
+        <img src="images/problem from siliac 1.jpeg" alt="Gâteau chocolat signature" loading="lazy">
         <div class="product-info">
-          <h3>Gâteau au chocolat</h3>
-          <div class="price">12,90 €</div>
+          <h3>Fondant au chocolat</h3>
+          <div class="price">43 DH</div>
           <a href="customize.html?product=Gâteau au chocolat&price=12.9" class="btn-custom">Personnaliser</a>
         </div>
       </div>
       <div class="product-card" data-name="Gâteau Banane & Choco" data-price="8.5">
         <img src="images/problem from sugar 1.jpeg" alt="Pain à la banane gourmet" loading="lazy">
         <div class="product-info">
-          <h3>Gâteau Banane & Choco</h3>
-          <div class="price">8,50 €</div>
+          <h3>Moist Chocolate</h3>
+          <div class="price">40 DH</div>
           <a href="customize.html?product=Donuts&price=8.5" class="btn-custom">Personnaliser</a>
         </div>
       </div>
       <div class="product-card" data-name="Tarte Framboise" data-price="14.2">
         <img src="images/problem from sugar.jpeg" alt="Tarte aux framboises fraîche" loading="lazy">
         <div class="product-info">
-          <h3>Tarte Framboise</h3>
-          <div class="price">14,20 €</div>
+          <h3>Diabitique Framboise</h3>
+          <div class="price">30 DH</div>
           <a href="customize.html?product=Cheesecake&price=14.2" class="btn-custom">Personnaliser</a>
         </div>
       </div>
-      </div>
+    </div>
     </div>
 
     <!-- NOUVEAU PANEL: PFE Smart Dietary Platform -->
@@ -127,11 +129,11 @@
         data-vegan="false">
         <img src="images/poeple%20normal.jpeg" alt="Gâteau chocolat">
         <div class="product-info">
-          <h3>Gâteau au chocolat</h3>
+          <h3>Trompe l'oeil mongo</h3>
           <div class="badges-container">
             <span class="diet-badge" style="background:#e0d6ff; color:#5a189a;">Classique</span>
           </div>
-          <div class="price">12,90 €</div>
+          <div class="price">32 DH</div>
           <a href="customize.html?product=Gâteau au chocolat&price=12.9&category=classic"
             class="btn-custom">Personnaliser</a>
         </div>
@@ -142,11 +144,11 @@
         data-vegan="false">
         <img src="images/problem from sugar 1.jpeg" alt="Tarte aux fruits">
         <div class="product-info">
-          <h3>Tarte aux fruits allégée</h3>
+          <h3>Moist Chocolate</h3>
           <div class="badges-container">
             <span class="diet-badge badge-diabetic">Diabetic Friendly</span>
           </div>
-          <div class="price">11,90 €</div>
+          <div class="price">40 DH</div>
           <a href="customize.html?product=Tarte aux fruits allégée&price=11.9&category=sugar-free"
             class="btn-custom">Personnaliser</a>
         </div>
@@ -157,12 +159,12 @@
         data-vegan="true">
         <img src="images/problem from sugar.jpeg" alt="Mousse Framboise">
         <div class="product-info">
-          <h3>Mousse Framboise Sans Sucre</h3>
+          <h3>Diabitique Framboise</h3>
           <div class="badges-container">
             <span class="diet-badge badge-diabetic">Diabetic Friendly</span>
             <span class="diet-badge badge-vegan">Vegan</span>
           </div>
-          <div class="price">9,50 €</div>
+          <div class="price">30 DH</div>
           <a href="customize.html?product=Mousse Framboise Sans Sucre&price=9.5&category=sugar-free"
             class="btn-custom">Personnaliser</a>
         </div>
@@ -173,13 +175,14 @@
         data-vegan="true">
         <img src="images/problem from siliac 1.jpeg" alt="Brownie Amande">
         <div class="product-info">
-          <h3>Brownie (Sans Gluten)</h3>
+          <h3>Fondant au chocolat</h3>
           <div class="badges-container">
             <span class="diet-badge badge-gluten-free">Gluten-Free Certified</span>
             <span class="diet-badge badge-vegan">Vegan</span>
-            <span class="diet-badge" style="background:#e3fded; color:#128c46; border: 1px solid #c2f5d9;">Sans Lactose</span>
+            <span class="diet-badge" style="background:#e3fded; color:#128c46; border: 1px solid #c2f5d9;">Sans
+              Lactose</span>
           </div>
-          <div class="price">13,50 €</div>
+          <div class="price">43 DH</div>
           <a href="customize.html?product=Brownie Sans Gluten&price=13.5&category=gluten-free"
             class="btn-custom">Personnaliser</a>
         </div>
@@ -190,11 +193,11 @@
         data-vegan="false">
         <img src="images/problem from siliac.jpeg" alt="Macarons Gourmet">
         <div class="product-info">
-          <h3>Duo de Macarons (Cœliaque)</h3>
+          <h3>Gateaux amonde</h3>
           <div class="badges-container">
             <span class="diet-badge badge-gluten-free">Gluten-Free Certified</span>
           </div>
-          <div class="price">14,80 €</div>
+          <div class="price">20 DH</div>
           <a href="customize.html?product=Duo de Macarons&price=14.8&category=gluten-free"
             class="btn-custom">Personnaliser</a>
         </div>
@@ -203,16 +206,14 @@
       <!-- CUSTOM -->
       <div class="product-card dietary-card" data-category="custom" data-lactose="true" data-nuts="true"
         data-vegan="true">
-        <img src="images/custom-creation.jpeg"
-          alt="Pâtisserie sur mesure" loading="lazy">
+        <img src="images/custom-creation.jpeg" alt="Pâtisserie sur mesure" loading="lazy">
         <div class="product-info">
           <h3>Création 100% Libre</h3>
           <div class="badges-container">
             <span class="diet-badge" style="background:#2b2b3a; color:#fff;">Sur Mesure</span>
           </div>
-          <div class="price">À partir de 10,00 €</div>
-          <a href="sur-mesure.html"
-            class="btn-custom">Personnaliser</a>
+          <div class="price">À partir de 100 DH</div>
+          <a href="sur-mesure.html" class="btn-custom">Personnaliser</a>
         </div>
       </div>
     </div>

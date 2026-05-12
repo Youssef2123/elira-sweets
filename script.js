@@ -13,9 +13,37 @@ function updateGlobalCartCount() {
   });
 }
 
-// Initialisation du compteur au chargement de chaque page
+// Initialisation au chargement de chaque page
 document.addEventListener('DOMContentLoaded', () => {
   updateGlobalCartCount();
+  
+  // Mobile Menu Logic
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const navLinks = document.getElementById('navLinks');
+  
+  if (mobileMenuBtn && navLinks) {
+    mobileMenuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      const icon = mobileMenuBtn.querySelector('i');
+      if (icon) {
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+      }
+    });
+  }
+
+  // Mega Menu Accordion for Mobile
+  const megaNavItem = document.querySelector('.nav-item-mega');
+  if (megaNavItem) {
+    const megaLink = megaNavItem.querySelector('a');
+    megaLink.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        megaNavItem.classList.toggle('active');
+      }
+    });
+  }
+
   // Écoute les modifications du localStorage depuis d'autres onglets
   window.addEventListener('storage', (e) => {
     if (e.key === 'sweetCustomizeCart') updateGlobalCartCount();
