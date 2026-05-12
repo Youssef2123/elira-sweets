@@ -6,7 +6,7 @@
 // Exemple : fonction utilitaire pour mettre à jour l'affichage du compteur panier
 function updateGlobalCartCount() {
   const cart = JSON.parse(localStorage.getItem('sweetCustomizeCart') || '[]');
-  const totalItems = cart.reduce((acc) => acc + 1, 0);
+  const totalItems = cart.reduce((acc, item) => acc + (item.quantity || 1), 0);
   const cartSpans = document.querySelectorAll('#cartCount');
   cartSpans.forEach(span => {
     if (span) span.innerText = totalItems;

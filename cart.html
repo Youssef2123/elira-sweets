@@ -77,20 +77,20 @@
           <div class="summary-details">
             <div class="summary-row">
               <span>Sous-total</span>
-              <span id="subtotalDisplay">0.00 €</span>
+              <span id="subtotalDisplay">0.00 DH</span>
             </div>
             <div class="summary-row">
               <span>Frais de livraison</span>
-              <span id="deliveryDisplay">5.00 €</span>
+              <span id="deliveryDisplay">5.00 DH</span>
             </div>
             <div class="summary-row promo-row">
               <span>Remise Gourmet</span>
-              <span>-0.00 €</span>
+              <span>-0.00 DH</span>
             </div>
             <div class="luxury-divider-small"></div>
             <div class="summary-row total-row">
               <span>Total TTC</span>
-              <span id="totalDisplay">0.00 €</span>
+              <span id="totalDisplay">0.00 DH</span>
             </div>
           </div>
           <button id="validateOrderBtn" class="btn-luxury-checkout">
@@ -152,8 +152,8 @@
             <p>Votre panier est encore vide de douceurs.</p>
             <a href="index.html" class="btn-luxury">Découvrir nos créations</a>
           </div>`;
-        subtotalEl.innerText = "0.00 €";
-        totalEl.innerText = "0.00 €";
+        subtotalEl.innerText = "0.00 DH";
+        totalEl.innerText = "0.00 DH";
         return;
       }
 
@@ -167,10 +167,12 @@
 
         const ingredientsDisplay = item.ingredients.length ? item.ingredients.join(', ') : 'Recette Signature';
         
-        // Placeholder image for luxury feel
-        const itemImg = item.category === 'sugar-free' ? 'images/problem from sugar 1.jpeg' : 
+        // Use the specific saved image or fallback to category-based image
+        const itemImg = item.image || (
+                        item.category === 'sugar-free' ? 'images/problem from sugar 1.jpeg' : 
                         item.category === 'gluten-free' ? 'images/problem from siliac 1.jpeg' : 
-                        'images/custom-creation.jpeg';
+                        'images/custom-creation.jpeg'
+                      );
 
         html += `
           <div class="luxury-cart-item">
@@ -191,7 +193,7 @@
                   <span>${qty}</span>
                   <button onclick="updateQty(${index}, 1)">+</button>
                 </div>
-                <div class="cart-item-price">${itemTotal.toFixed(2)} €</div>
+                <div class="cart-item-price">${itemTotal.toFixed(2)} DH</div>
               </div>
             </div>
           </div>
@@ -199,8 +201,8 @@
       });
 
       cartList.innerHTML = html;
-      subtotalEl.innerText = subtotal.toFixed(2) + " €";
-      totalEl.innerText = (subtotal + deliveryFee).toFixed(2) + " €";
+      subtotalEl.innerText = subtotal.toFixed(2) + " DH";
+      totalEl.innerText = (subtotal + deliveryFee).toFixed(2) + " DH";
     }
 
     window.removeItem = function(index) {

@@ -62,6 +62,9 @@
     <div class="customize-container">
       <!-- Colonne ingrédients -->
       <div class="ingredients-panel">
+        <div class="product-preview-box" style="margin-bottom: 2rem; border-radius: 24px; overflow: hidden; box-shadow: var(--ombre-douce);">
+          <img id="productPreviewImg" src="" alt="Aperçu du produit" style="width: 100%; height: 200px; object-fit: cover;">
+        </div>
         <h3><i class="fas fa-seedling"></i> Ingrédients de base</h3>
         <div class="checkbox-group" id="baseIngredients">
           <!-- Injectés par JS -->
@@ -101,9 +104,17 @@
           </div>
         </div>
 
-        <div style="margin: 1.5rem 0 1rem 0;">
+        <div style="margin: 1.5rem 0 1.5rem 0; display: flex; align-items: center; justify-content: space-between;">
+          <span style="font-weight:600">Quantité :</span>
+          <div class="quantity-control">
+            <button type="button" onclick="changeQty(-1)">-</button>
+            <span id="quantityDisplay">1</span>
+            <button type="button" onclick="changeQty(1)">+</button>
+          </div>
+        </div>
+        <div style="margin: 1.5rem 0 2rem 0;">
           <span style="font-weight:500">Prix personnalisé :</span>
-          <div class="dynamic-price" id="customPriceDisplay">0.00 €</div>
+          <div class="dynamic-price" id="customPriceDisplay">0.00 DH</div>
         </div>
         <button id="addToCartBtn" class="btn-primary" style="width:100%"><i class="fas fa-cart-plus"></i> Ajouter au panier</button>
         <p id="currentProductName" style="margin-top: 1rem; font-size:0.85rem; color:var(--violet);"></p>
@@ -123,7 +134,8 @@
     let currentProduct = {
       name: urlParams.get('product') || "Création Libre",
       basePrice: parseFloat(urlParams.get('price')) || 10.0,
-      category: urlParams.get('category') || "custom"
+      category: urlParams.get('category') || "custom",
+      image: urlParams.get('image') || ""
     };
 
     const finalDiv = document.getElementById('finalIngredientsList');
@@ -208,7 +220,23 @@
 
     function renderUI() {
       badgesContainer.innerHTML = currentConfig.badges;
-      productNameSpan.innerText = `🍰 Personnalisation : ${currentProduct.name} (base ${currentProduct.basePrice.toFixed(2)}€)`;
+      productNameSpan.innerText = `🍰 Personnalisation : ${currentProduct.name} (base ${currentProduct.basePrice.toFixed(2)}DH)`;
+
+      // Set Preview Image
+      const previewImg = document.getElementById('productPreviewImg');
+      if (previewImg) {
+        if (currentProduct.image) {
+          previewImg.src = currentProduct.image;
+        } else {
+          const imgMap = {
+            "classic": "images/poeple normal.jpeg",
+            "sugar-free": "images/problem from sugar 1.jpeg",
+            "gluten-free": "images/problem from siliac 1.jpeg",
+            "custom": "images/custom-creation.jpeg"
+          };
+          previewImg.src = imgMap[currentProduct.category] || imgMap["custom"];
+        }
+      }
 
       // Render Base
       baseContainer.innerHTML = '';
@@ -224,7 +252,7 @@
       currentConfig.alt.forEach((ing, i) => {
         ingredientsData[ing.name] = ing;
         const lbl = document.createElement('label');
-        lbl.innerHTML = `<input type="checkbox" value="${ing.name}" class="alt-cb" data-price="${ing.price}"> ${ing.name} (+${ing.price.toFixed(2)}€)`;
+        lbl.innerHTML = `<input type="checkbox" value="${ing.name}" class="alt-cb" data-price="${ing.price}"> ${ing.name} (+${ing.price.toFixed(2)}DH)`;
         altContainer.appendChild(lbl);
       });
 
@@ -251,13 +279,14 @@
         extraCost += parseFloat(cb.getAttribute('data-price'));
       });
 
-      let finalPrice = currentProduct.basePrice - deduction + extraCost;
-      finalPrice = Math.max(finalPrice, 3.0);
-      finalPrice = parseFloat(finalPrice.toFixed(2));
+      let unitPrice = currentProduct.basePrice - deduction + extraCost;
+      unitPrice = Math.max(unitPrice, 3.0);
+      
+      let totalPrice = unitPrice * currentQty;
 
       let allIngredients = [...selectedBase, ...selectedAlt];
       finalDiv.innerText = allIngredients.length ? allIngredients.join(', ') : 'Aucun ingrédient (pâte neutre)';
-      priceSpan.innerText = finalPrice.toFixed(2) + ' €';
+      priceSpan.innerText = totalPrice.toFixed(2) + ' DH';
 
       // Calcul nutritionnel
       let totalCal = 0, totalSug = 0, totalPro = 0;
@@ -279,13 +308,21 @@
       nutriGluten.innerText = hasGluten ? "Oui" : "Non (0%)";
       nutriGluten.style.color = hasGluten ? "#b0004b" : "#128c46";
 
-      return { finalPrice, ingredientsList: allIngredients, nutrition: { cal: totalCal, sug: totalSug, pro: totalPro, glut: hasGluten } };
+      return { finalPrice: unitPrice, ingredientsList: allIngredients, nutrition: { cal: totalCal, sug: totalSug, pro: totalPro, glut: hasGluten } };
     }
 
     function showNotification(msg) {
       toast.innerText = msg;
       toast.style.opacity = '1';
       setTimeout(() => toast.style.opacity = '0', 2000);
+    }
+
+    let currentQty = 1;
+    function changeQty(delta) {
+      currentQty += delta;
+      if (currentQty < 1) currentQty = 1;
+      document.getElementById('quantityDisplay').innerText = currentQty;
+      updatePriceAndIngredients(); // Refresh the price display
     }
 
     function addToCart() {
@@ -296,19 +333,28 @@
         category: currentProduct.category,
         basePrice: currentProduct.basePrice,
         finalPrice: finalPrice,
+        quantity: currentQty, // Use the selected quantity
         ingredients: [...ingredientsList],
         nutrition: nutrition,
         badges: currentConfig.badges,
+        image: currentProduct.image || "", // Save the specific image
         date: new Date().toLocaleString()
       };
       let cart = JSON.parse(localStorage.getItem('sweetCustomizeCart') || '[]');
       cart.push(cartItem);
       localStorage.setItem('sweetCustomizeCart', JSON.stringify(cart));
-      showNotification(`🍰 ${currentProduct.name} ajouté au panier !`);
+      showNotification(`🍰 ${currentQty}x ${currentProduct.name} ajouté au panier !`);
       
       const cartSpan = document.getElementById('cartCount');
-      if (cartSpan) cartSpan.innerText = cart.length;
+      if (cartSpan) {
+        const total = cart.reduce((acc, item) => acc + (item.quantity || 1), 0);
+        cartSpan.innerText = total;
+      }
       window.dispatchEvent(new Event('storage'));
+      
+      // Reset qty
+      currentQty = 1;
+      document.getElementById('quantityDisplay').innerText = "1";
     }
 
     function initCustomize() {
