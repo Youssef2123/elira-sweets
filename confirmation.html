@@ -1,0 +1,460 @@
+<!-- confirmation.html - Page de confirmation de commande premium pour SweetCustomize -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commande Confirmée | SweetCustomize</title>
+  
+  <!-- CSS Styles -->
+  <link rel="stylesheet" href="checkout.css">
+  
+  <!-- Google Fonts: Outfit & Playfair Display -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome for Premium Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* Confirmation page specific overrides */
+    .confirmation-wrapper {
+      max-width: 850px;
+      margin: 4rem auto;
+      padding: 0 1.5rem;
+    }
+    
+    .confirm-header-box {
+      text-align: center;
+      margin-bottom: 3rem;
+      animation: fadeInDown 0.8s ease-out;
+    }
+    
+    .badge-success-glow {
+      display: inline-flex;
+      background: var(--success-light);
+      color: var(--success);
+      padding: 0.6rem 1.6rem;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 25px rgba(18, 140, 70, 0.1);
+      margin-bottom: 1.5rem;
+    }
+    
+    .confirm-header-box h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      color: var(--dark-purple);
+      margin-bottom: 0.5rem;
+    }
+    
+    .order-number-tag {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--accent-purple);
+      background: var(--light-purple);
+      padding: 0.3rem 1.2rem;
+      border-radius: 20px;
+      display: inline-block;
+      margin-top: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .confirm-details-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-gray);
+      box-shadow: var(--soft-shadow);
+      padding: 3rem;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+    
+    .confirm-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--dark-purple);
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--border-gray);
+      padding-bottom: 0.8rem;
+    }
+    
+    .confirm-section-title i {
+      color: var(--accent-gold);
+    }
+    
+    .details-row-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem 2rem;
+      margin-bottom: 2.5rem;
+    }
+    
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    
+    .detail-item span.label {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .detail-item span.value {
+      font-size: 1.05rem;
+      color: var(--text-dark);
+      font-weight: 700;
+    }
+    
+    .ordered-sweets-list {
+      background: var(--soft-gray);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    
+    .ordered-sweet-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px dashed var(--border-gray);
+    }
+    
+    .ordered-sweet-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    
+    .ordered-sweet-item:first-child {
+      padding-top: 0;
+    }
+    
+    .sweet-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    
+    .sweet-title {
+      font-weight: 700;
+      color: var(--dark-purple);
+      font-size: 1.05rem;
+    }
+    
+    .sweet-ingredients {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    
+    .sweet-qty {
+      font-weight: 700;
+      color: var(--primary-purple);
+      background: var(--light-purple);
+      padding: 0.15rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+    }
+    
+    .total-paid-highlight {
+      background: var(--purple-gradient);
+      color: var(--white);
+      border-radius: var(--radius-md);
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--medium-shadow);
+    }
+    
+    .total-paid-highlight h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    
+    .total-amount-large {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+    }
+    
+    .confirmation-actions {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+    
+    .btn-home {
+      background: var(--purple-gradient);
+      color: var(--white);
+      border: none;
+      border-radius: var(--radius-btn);
+      padding: 1.1rem 2.2rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+      box-shadow: 0 10px 25px rgba(90, 24, 154, 0.15);
+    }
+    
+    .btn-home:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(90, 24, 154, 0.25);
+    }
+    
+    .btn-print {
+      background: var(--white);
+      color: var(--primary-purple);
+      border: 2px solid var(--primary-purple);
+      border-radius: var(--radius-btn);
+      padding: 1.1rem 2.2rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+    
+    .btn-print:hover {
+      background: var(--bg-purple-light);
+      transform: translateY(-3px);
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: white;
+        color: black;
+      }
+      .navbar, .confirmation-actions, .checkout-footer, .header-tag {
+        display: none !important;
+      }
+      .confirm-details-card {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+      }
+      .total-paid-highlight {
+        background: #f7f3ff !important;
+        color: black !important;
+        border: 1px solid #ddd !important;
+        box-shadow: none !important;
+      }
+      .total-amount-large {
+        color: #333 !important;
+      }
+      .confirmation-wrapper {
+        margin: 0 !important;
+        max-width: 100% !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .details-row-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+      .confirm-details-card {
+        padding: 1.8rem;
+      }
+      .confirmation-actions {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .btn-home, .btn-print {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-birthday-cake logo-icon"></i>
+        <span>SweetCustomize</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="index.html#dietaryProductsGrid">Produits</a></li>
+        <li><a href="cart.html">Panier</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- CONFIRMATION PAGE CONTENT -->
+  <main class="confirmation-wrapper">
+    
+    <header class="confirm-header-box">
+      <div class="badge-success-glow">
+        <i class="fas fa-circle-check"></i>
+        <span>Commande Enregistrée</span>
+      </div>
+      <h1>Merci pour votre commande !</h1>
+      <p>Votre demande est en cours de traitement par notre brigade culinaire.</p>
+      <div>
+        <span class="order-number-tag" id="orderNoDisplay">SC-000000</span>
+      </div>
+    </header>
+
+    <div class="confirm-details-card">
+      
+      <!-- 1. LIVRAISON & CLIENT DETAILS -->
+      <section>
+        <h2 class="confirm-section-title">
+          <i class="fas fa-circle-info"></i> Informations Générales
+        </h2>
+        <div class="details-row-grid">
+          <div class="detail-item">
+            <span class="label">Client d'honneur</span>
+            <span class="value" id="clientName">Chargement...</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Adresse de livraison</span>
+            <span class="value" id="clientAddress">Chargement...</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Mode de livraison</span>
+            <span class="value" id="deliveryMode">Chargement...</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Mode de paiement</span>
+            <span class="value" id="paymentMode">Chargement...</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. ORDERED ITEMS TABLE -->
+      <section>
+        <h2 class="confirm-section-title">
+          <i class="fas fa-cake-candles"></i> Vos Douceurs Commandées
+        </h2>
+        <div class="ordered-sweets-list" id="orderedSweetsList">
+          <!-- Injected by JS -->
+          <p style="text-align: center; color: var(--text-muted);">Aucun article détecté.</p>
+        </div>
+      </section>
+
+      <!-- 3. FINAL TOTAL PRICE HIGHLIGHT -->
+      <div class="total-paid-highlight">
+        <div class="total-left">
+          <h3>Montant Total Payé TTC</h3>
+          <p style="font-size:0.8rem; opacity:0.85; margin-top:2px;">(Remises de bienvenue et frais inclus)</p>
+        </div>
+        <div class="total-right">
+          <span class="total-amount-large" id="totalDisplay">0.00 DH</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="confirmation-actions">
+      <button onclick="window.print()" class="btn-print">
+        <i class="fas fa-print"></i> Imprimer le reçu
+      </button>
+      <a href="index.html" class="btn-home">
+        <i class="fas fa-house-chimney"></i> Retourner à l'accueil
+      </a>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="checkout-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">
+          <i class="fas fa-birthday-cake"></i> SweetCustomize
+        </a>
+        <p>L'excellence de la haute pâtisserie personnalisée livrée directement chez vous.</p>
+      </div>
+      <div class="footer-contact">
+        <h4>Contactez-nous</h4>
+        <p><i class="fas fa-envelope"></i> contact@sweetcustomize.com</p>
+        <p><i class="fas fa-phone"></i> +212 5 22 00 99 88</p>
+      </div>
+      <div class="footer-socials">
+        <h4>Suivez-nous</h4>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>SweetCustomize © 2026 — Tous droits réservés. Pâtisserie d'Exception.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const orderData = localStorage.getItem('lastSweetOrder');
+      if (!orderData) {
+        // Redirection vers l'accueil si aucune info
+        return;
+      }
+      
+      const order = JSON.parse(orderData);
+      
+      // Injection des textes
+      document.getElementById('orderNoDisplay').innerText = order.orderNumber;
+      document.getElementById('clientName').innerText = order.customerName;
+      document.getElementById('clientAddress').innerText = order.address;
+      document.getElementById('deliveryMode').innerText = order.deliveryMethod;
+      
+      // Formater le mode de paiement en Français
+      let pMethod = order.paymentMethod;
+      if (pMethod === 'Cash on Delivery') pMethod = 'Espèces à la livraison';
+      else if (pMethod === 'Carte Bancaire') pMethod = 'Carte Bancaire (Visa/Mastercard)';
+      document.getElementById('paymentMode').innerText = pMethod;
+      
+      document.getElementById('totalDisplay').innerText = order.totalPaid;
+
+      // Injection des articles
+      const listContainer = document.getElementById('orderedSweetsList');
+      if (listContainer && order.items && order.items.length > 0) {
+        let html = '';
+        order.items.forEach(item => {
+          const ingredients = item.ingredients && item.ingredients.length 
+            ? item.ingredients.join(', ') 
+            : 'Recette Signature';
+            
+          html += `
+            <div class="ordered-sweet-item">
+              <div class="sweet-left">
+                <span class="sweet-title">${item.name}</span>
+                <span class="sweet-ingredients">${ingredients}</span>
+              </div>
+              <div class="sweet-right">
+                <span class="sweet-qty">Quantité: ${item.quantity}</span>
+              </div>
+            </div>
+          `;
+        });
+        listContainer.innerHTML = html;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -231,10 +231,7 @@
 
     document.getElementById('validateOrderBtn').addEventListener('click', () => {
       if (cart.length === 0) return;
-      alert("🎉 Merci pour votre confiance ! Votre commande ELIRA Sweets est en cours de préparation.");
-      cart = [];
-      saveCart();
-      renderCart();
+      window.location.href = 'checkout.html';
     });
 
     window.addEventListener('storage', (e) => {

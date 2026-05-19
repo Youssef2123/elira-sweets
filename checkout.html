@@ -1,0 +1,470 @@
+<!-- checkout.html - Page de paiement moderne et premium pour SweetCustomize -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finaliser votre commande | SweetCustomize</title>
+  
+  <!-- CSS Styles -->
+  <link rel="stylesheet" href="checkout.css">
+  
+  <!-- Google Fonts: Outfit (modern & sleek) & Playfair Display (luxury serif) -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome for Premium Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- 1. NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-birthday-cake logo-icon"></i>
+        <span>SweetCustomize</span>
+      </a>
+      <button class="menu-toggle" id="mobileMenuBtn" aria-label="Toggle Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="index.html#dietaryProductsGrid">Produits</a></li>
+        <li><a href="cart.html">Panier (<span id="cartCount">0</span>)</a></li>
+        <li><a href="checkout.html" class="active">Checkout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- MAIN LAYOUT -->
+  <main class="checkout-wrapper">
+    
+    <!-- 2. CHECKOUT HEADER -->
+    <header class="checkout-header">
+      <span class="header-tag">Étape Finale</span>
+      <h1>Finaliser votre commande</h1>
+      <p>Vérifiez vos produits personnalisés avant le paiement</p>
+      <div class="luxury-decorator">
+        <span class="line"></span>
+        <span class="crown-dot"><i class="fas fa-crown"></i></span>
+        <span class="line"></span>
+      </div>
+    </header>
+
+    <!-- CONTENT GRID -->
+    <div class="checkout-grid">
+      
+      <!-- LEFT COLUMN: FORM & OPTIONS -->
+      <section class="checkout-main-content">
+        
+        <form id="checkoutForm" novalidate>
+          
+          <!-- 3. CUSTOMER INFORMATION FORM -->
+          <div class="checkout-card animate-slide-up">
+            <div class="card-header">
+              <div class="header-icon"><i class="fas fa-user-astronaut"></i></div>
+              <div class="header-titles">
+                <h2>1. Informations Personnelles</h2>
+                <p>Vos coordonnées pour la livraison et la facturation</p>
+              </div>
+            </div>
+            
+            <div class="form-grid">
+              <!-- Full Name -->
+              <div class="input-group">
+                <label for="fullName">Nom complet</label>
+                <div class="input-wrapper">
+                  <i class="fas fa-user input-icon"></i>
+                  <input type="text" id="fullName" name="fullName" placeholder="Ex: Jean Dupont" required>
+                  <span class="focus-border"></span>
+                </div>
+                <span class="error-msg" id="fullNameError">Le nom complet est requis.</span>
+              </div>
+              
+              <!-- Email Address -->
+              <div class="input-group">
+                <label for="email">Adresse email</label>
+                <div class="input-wrapper">
+                  <i class="fas fa-envelope input-icon"></i>
+                  <input type="email" id="email" name="email" placeholder="Ex: jean.dupont@email.com" required>
+                  <span class="focus-border"></span>
+                </div>
+                <span class="error-msg" id="emailError">Veuillez entrer une adresse email valide.</span>
+              </div>
+
+              <!-- Phone Number -->
+              <div class="input-group">
+                <label for="phone">Numéro de téléphone</label>
+                <div class="input-wrapper">
+                  <i class="fas fa-phone input-icon"></i>
+                  <input type="tel" id="phone" name="phone" placeholder="Ex: 0612345678" required>
+                  <span class="focus-border"></span>
+                </div>
+                <span class="error-msg" id="phoneError">Veuillez entrer un numéro valide (ex: 0612345678 ou +212...).</span>
+              </div>
+
+              <!-- Delivery Address -->
+              <div class="input-group full-width">
+                <label for="address">Adresse de livraison</label>
+                <div class="input-wrapper">
+                  <i class="fas fa-map-marker-alt input-icon"></i>
+                  <input type="text" id="address" name="address" placeholder="Ex: 42, Rue des Cerisiers, Apt 5" required>
+                  <span class="focus-border"></span>
+                </div>
+                <span class="error-msg" id="addressError">L'adresse de livraison est requise.</span>
+              </div>
+
+              <!-- City -->
+              <div class="input-group">
+                <label for="city">Ville</label>
+                <div class="input-wrapper">
+                  <i class="fas fa-building input-icon"></i>
+                  <input type="text" id="city" name="city" placeholder="Ex: Casablanca" required>
+                  <span class="focus-border"></span>
+                </div>
+                <span class="error-msg" id="cityError">La ville est requise.</span>
+              </div>
+
+              <!-- Postal Code -->
+              <div class="input-group">
+                <label for="postalCode">Code Postal</label>
+                <div class="input-wrapper">
+                  <i class="fas fa-mail-bulk input-icon"></i>
+                  <input type="text" id="postalCode" name="postalCode" placeholder="Ex: 20000" required>
+                  <span class="focus-border"></span>
+                </div>
+                <span class="error-msg" id="postalCodeError">Le code postal est requis.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. DELIVERY OPTIONS -->
+          <div class="checkout-card animate-slide-up" style="animation-delay: 0.1s;">
+            <div class="card-header">
+              <div class="header-icon"><i class="fas fa-truck"></i></div>
+              <div class="header-titles">
+                <h2>2. Mode de Livraison</h2>
+                <p>Choisissez comment vous souhaitez recevoir vos gourmandises</p>
+              </div>
+            </div>
+
+            <div class="delivery-options-grid">
+              <!-- Standard Delivery Card -->
+              <label class="delivery-card active" id="labelDeliveryStandard">
+                <input type="radio" name="deliveryOption" id="deliveryStandard" value="standard" checked>
+                <div class="delivery-card-content">
+                  <span class="select-indicator"><i class="fas fa-check-circle"></i></span>
+                  <div class="delivery-info">
+                    <span class="delivery-title">Livraison Standard</span>
+                    <span class="delivery-time">2 à 3 jours ouvrés</span>
+                  </div>
+                  <span class="delivery-price">20 DH</span>
+                </div>
+              </label>
+
+              <!-- Express Delivery Card -->
+              <label class="delivery-card" id="labelDeliveryExpress">
+                <input type="radio" name="deliveryOption" id="deliveryExpress" value="express">
+                <div class="delivery-card-content">
+                  <span class="select-indicator"><i class="fas fa-check-circle"></i></span>
+                  <div class="delivery-info">
+                    <span class="delivery-title">Livraison Express</span>
+                    <span class="delivery-time">Le jour même (commande avant 12h)</span>
+                  </div>
+                  <span class="delivery-price">50 DH</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- 5. PAYMENT METHOD -->
+          <div class="checkout-card animate-slide-up" style="animation-delay: 0.2s;">
+            <div class="card-header">
+              <div class="header-icon"><i class="fas fa-credit-card"></i></div>
+              <div class="header-titles">
+                <h2>3. Mode de Paiement</h2>
+                <p>Vos transactions sont cryptées et 100% sécurisées</p>
+              </div>
+            </div>
+
+            <div class="payment-methods-tabs">
+              <!-- Cash on Delivery Tab -->
+              <label class="payment-tab active" id="tabCod">
+                <input type="radio" name="paymentMethod" id="paymentCod" value="cod" checked>
+                <i class="fas fa-hand-holding-dollar payment-tab-icon"></i>
+                <span>Espèces à la livraison</span>
+              </label>
+
+              <!-- Credit Card Tab -->
+              <label class="payment-tab" id="tabCard">
+                <input type="radio" name="paymentMethod" id="paymentCard" value="card">
+                <i class="far fa-credit-card payment-tab-icon"></i>
+                <span>Carte Bancaire</span>
+              </label>
+
+              <!-- PayPal Tab -->
+              <label class="payment-tab" id="tabPaypal">
+                <input type="radio" name="paymentMethod" id="paymentPaypal" value="paypal">
+                <i class="fab fa-paypal payment-tab-icon"></i>
+                <span>PayPal</span>
+              </label>
+            </div>
+
+            <!-- CREDIT CARD DETAILS CONTAINER -->
+            <div class="credit-card-details" id="creditCardDetails">
+              <div class="credit-card-form-decor">
+                <div class="cc-chip"></div>
+                <div class="cc-brand-logo"><i class="fab fa-cc-visa"></i></div>
+              </div>
+              <div class="form-grid">
+                <!-- Card Holder -->
+                <div class="input-group full-width">
+                  <label for="cardHolder">Nom sur la carte</label>
+                  <div class="input-wrapper">
+                    <i class="fas fa-user-tag input-icon"></i>
+                    <input type="text" id="cardHolder" name="cardHolder" placeholder="Ex: JEAN DUPONT">
+                    <span class="focus-border"></span>
+                  </div>
+                  <span class="error-msg" id="cardHolderError">Le nom sur la carte est requis.</span>
+                </div>
+
+                <!-- Card Number -->
+                <div class="input-group">
+                  <label for="cardNumber">Numéro de carte</label>
+                  <div class="input-wrapper">
+                    <i class="fas fa-credit-card input-icon"></i>
+                    <input type="text" id="cardNumber" name="cardNumber" placeholder="4532 •••• •••• ••••" maxlength="19">
+                    <span class="focus-border"></span>
+                  </div>
+                  <span class="error-msg" id="cardNumberError">Veuillez entrer un numéro de carte valide.</span>
+                </div>
+
+                <!-- Expiration Date -->
+                <div class="input-group">
+                  <div class="half-inputs">
+                    <div class="sub-input">
+                      <label for="cardExpiry">Date d'expiration</label>
+                      <div class="input-wrapper">
+                        <i class="far fa-calendar-alt input-icon"></i>
+                        <input type="text" id="cardExpiry" name="cardExpiry" placeholder="MM/AA" maxlength="5">
+                        <span class="focus-border"></span>
+                      </div>
+                      <span class="error-msg" id="cardExpiryError">Date invalide (MM/AA).</span>
+                    </div>
+
+                    <div class="sub-input">
+                      <label for="cardCvv">CVV <i class="far fa-question-circle tooltip-trigger" title="3 chiffres au dos de votre carte"></i></label>
+                      <div class="input-wrapper">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="cardCvv" name="cardCvv" placeholder="123" maxlength="4">
+                        <span class="focus-border"></span>
+                      </div>
+                      <span class="error-msg" id="cardCvvError">Requis (3-4 chiffres).</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PayPal & COD Dynamic Status Message -->
+            <div class="dynamic-payment-status" id="paymentStatusMsg">
+              <i class="fas fa-circle-info"></i>
+              <span id="paymentStatusText">Vous paierez le montant total en espèces directement auprès de notre livreur à réception de vos douceurs.</span>
+            </div>
+          </div>
+
+          <!-- 8. ALLERGIES & DIETARY SAFETY -->
+          <div class="checkout-card allergy-safety-card animate-slide-up" style="animation-delay: 0.3s;">
+            <div class="card-header">
+              <div class="header-icon"><i class="fas fa-shield-heart"></i></div>
+              <div class="header-titles">
+                <h2>Informations Alimentaires</h2>
+                <p>Votre sécurité est notre priorité. Consultez nos certifications.</p>
+              </div>
+            </div>
+
+            <div class="allergy-safety-grid">
+              <div class="safety-item gluten-free">
+                <div class="safety-icon-wrapper">
+                  <i class="fas fa-seedling"></i>
+                </div>
+                <div class="safety-info">
+                  <span class="safety-title">Sans Gluten</span>
+                  <span class="safety-badge">Certifié Cœliaque</span>
+                </div>
+              </div>
+
+              <div class="safety-item sugar-free">
+                <div class="safety-icon-wrapper">
+                  <i class="fas fa-leaf"></i>
+                </div>
+                <div class="safety-info">
+                  <span class="safety-title">Sans Sucre</span>
+                  <span class="safety-badge">Diabetic Friendly</span>
+                </div>
+              </div>
+
+              <div class="safety-item contains-nuts">
+                <div class="safety-icon-wrapper">
+                  <i class="fas fa-triangle-exclamation"></i>
+                </div>
+                <div class="safety-info">
+                  <span class="safety-title">Fruits à coque</span>
+                  <span class="safety-badge alert-badge">Présence possible</span>
+                </div>
+              </div>
+
+              <div class="safety-item lactose-free">
+                <div class="safety-icon-wrapper">
+                  <i class="fas fa-cow"></i>
+                </div>
+                <div class="safety-info">
+                  <span class="safety-title">Sans Lactose</span>
+                  <span class="safety-badge">Digestion Légère</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </section>
+
+      <!-- RIGHT COLUMN: ORDER SUMMARY & PAYMENT TRIGGER -->
+      <aside class="checkout-sidebar">
+        
+        <!-- 6. ORDER SUMMARY SECTION -->
+        <div class="summary-card-premium animate-fade-in">
+          <div class="summary-top-decor"></div>
+          
+          <h2 class="sidebar-title">
+            <i class="fas fa-receipt"></i> Résumé de la Commande
+          </h2>
+          
+          <div class="summary-divider"></div>
+          
+          <!-- DYNAMIC ITEMS LIST -->
+          <div class="checkout-summary-items" id="checkoutSummaryItems">
+            <!-- Items injected by checkout.js -->
+            <div class="loading-items">
+              <i class="fas fa-circle-notch fa-spin"></i> Chargement de vos créations...
+            </div>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <!-- 7. COUPON SYSTEM -->
+          <div class="coupon-section">
+            <label for="couponInput">Code Promo</label>
+            <div class="coupon-field-wrapper">
+              <i class="fas fa-tag coupon-icon"></i>
+              <input type="text" id="couponInput" placeholder="Ex: SWEET10" autocomplete="off">
+              <button type="button" id="applyCouponBtn">Appliquer</button>
+            </div>
+            <span class="coupon-status-msg" id="couponStatusMsg"></span>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <!-- PRICING DETAILS -->
+          <div class="checkout-pricing-breakdown">
+            <div class="price-row">
+              <span>Sous-total</span>
+              <span id="summarySubtotal">0.00 DH</span>
+            </div>
+            <div class="price-row discount-row" id="summaryDiscountRow" style="display: none;">
+              <span>Remise Coupon (<span id="discountPercent">0</span>%)</span>
+              <span id="summaryDiscount">-0.00 DH</span>
+            </div>
+            <div class="price-row">
+              <span>Frais de livraison</span>
+              <span id="summaryDelivery">20.00 DH</span>
+            </div>
+            
+            <div class="summary-divider-accent"></div>
+            
+            <div class="price-row total-ttc-row">
+              <span>Total TTC</span>
+              <span id="summaryTotalTTC">0.00 DH</span>
+            </div>
+          </div>
+
+          <!-- 9. ORDER VALIDATION BUTTON -->
+          <button type="button" id="btnConfirmOrder" class="btn-luxury-confirm">
+            <span class="btn-text">Confirmer la commande</span>
+            <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+          </button>
+          
+          <div class="trust-indicators">
+            <p><i class="fas fa-shield-halved"></i> Paiement de confiance crypté SSL</p>
+            <p><i class="fas fa-box-tissue"></i> Préparation stérile certifiée</p>
+          </div>
+        </div>
+
+        <!-- ADDITIONAL SIDEBAR HELPER -->
+        <div class="checkout-support-card animate-fade-in">
+          <i class="fas fa-headset support-icon"></i>
+          <div class="support-info">
+            <h3>Une question sur votre commande ?</h3>
+            <p>Notre équipe de conseillers pâtissiers est à votre écoute au <strong>05 22 00 99 88</strong> du lundi au samedi (9h - 19h).</p>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- 10. FOOTER -->
+  <footer class="checkout-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">
+          <i class="fas fa-birthday-cake"></i> SweetCustomize
+        </a>
+        <p>L'excellence de la haute pâtisserie personnalisée livrée directement chez vous.</p>
+      </div>
+      <div class="footer-contact">
+        <h4>Contactez-nous</h4>
+        <p><i class="fas fa-envelope"></i> contact@sweetcustomize.com</p>
+        <p><i class="fas fa-phone"></i> +212 5 22 00 99 88</p>
+        <p><i class="fas fa-map-location-dot"></i> 85 Boulevard d'Anfa, Casablanca, Maroc</p>
+      </div>
+      <div class="footer-socials">
+        <h4>Suivez-nous</h4>
+        <div class="social-icons">
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>SweetCustomize © 2026 — Tous droits réservés. Pâtisserie d'Exception.</p>
+    </div>
+  </footer>
+
+  <!-- ANIMATED SUCCESS POPUP OVERLAY -->
+  <div class="success-popup-overlay" id="successPopup">
+    <div class="success-popup-content">
+      <div class="success-icon-ring">
+        <div class="success-icon-check">
+          <i class="fas fa-check"></i>
+        </div>
+        <div class="sparkle sparkle-1"><i class="fas fa-sparkles"></i></div>
+        <div class="sparkle sparkle-2"></div>
+        <div class="sparkle sparkle-3"></div>
+      </div>
+      <h2>Paiement validé avec succès !</h2>
+      <h3>Merci pour votre commande chez SweetCustomize</h3>
+      <p class="popup-subtext">Votre commande a été transmise à nos chefs pâtissiers. Nous préparons vos douceurs sur mesure avec le plus grand soin.</p>
+      
+      <div class="order-loader">
+        <div class="loader-bar"></div>
+      </div>
+      <p class="redirect-notice">Redirection vers votre reçu de commande...</p>
+    </div>
+  </div>
+
+  <!-- JavaScript logic -->
+  <script src="checkout.js"></script>
+</body>
+</html>
